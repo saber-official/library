@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${session.reader.username}"></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
+    <script th:src="@{/js/jquery-3.2.1.js}" src="../static/js/jquery-3.2.1.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js" ></script>
+    <script>
+    </script>
+</head>
+<body th:background="@{/img/wolf.jpg}" style=" background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;">
+<div id="header" th:replace="~{reader_header.html::copy1}"></div>
+
+</body>
+</html>

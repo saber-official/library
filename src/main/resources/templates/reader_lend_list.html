@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>我的借还</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
+    <script th:src="@{/js/jquery-3.2.1.js}" src="../static/js/jquery-3.2.1.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js" ></script>
+    <script>
+        $(function () {
+            $('#header').load('reader_header.html');
+        })
+    </script>
+</head>
+<body background="/img/lizhi.jpg" style=" background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;">
+<div id="header"></div>
+<div style="position: relative;top: 10%">
+    <div th:if="${succ} ne null">
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+                <p th:text="${succ}"></p>
+        </div>
+    </div>
+    <div th:if="${error} ne null">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+                <p th:text="${error}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default" style="width: 90%;margin-left: 5%;margin-top: 5%">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            我的借还日志
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>图书号</th>
+                <th>借出日期</th>
+                <th>归还日期</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="alog:${list}">
+                    <td th:text="${alog.bookId}"></td>
+                    <td th:text="${alog.lendDateStr}"></td>
+                    <td th:text="${alog.backDateStr}"></td>
+                    <div th:each="map:${maps}">
+                        <div th:if="${map} eq ${alog.bookId}">
+                            <td>超期</td>
+                        </div>
+                    </div>
+                        <div th:if="${alog.backDateStr} eq null">
+                            <td>未还</td>
+                        </div>
+                        <div th:if="${alog.backDateStr} ne null">
+                            <td>已还</td>
+                        </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
